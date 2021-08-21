@@ -1,1 +1,15 @@
+spring:
+  datasource:
+    username: storage
+    password: storage
+    url: jdbc:postgresql://localhost:5432/storage?autoReconnect=true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  liquibase:
+    change-log: master.yml
+    enabled: true
 

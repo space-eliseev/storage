@@ -1,27 +1,25 @@
 package space.eliseev.storage.model;
 
+import lombok.*;
+
+import javax.persistence.*;
+
 /**
  * Тип товара
  */
-public enum ItemType {
+@Entity
+@Table(name = "ITEM_TYPE")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class ItemType extends BaseEntity {
+    private static final long serialVersionUID = -8215147498218883964L;
 
     /**
-     * Принтер
+     * Наименование типа товара
      */
-    PRINTER,
-
-    /**
-     * Сканер
-     */
-    SCANNER,
-
-    /**
-     * Ксерокс
-     */
-    PHOTOCOPIER,
-
-    /**
-     * Расходные материалы
-     */
-    CONSUMABLES
+    @Column(name = "NAME")
+    private String name;
 }

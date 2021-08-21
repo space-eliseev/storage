@@ -1,0 +1,119 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-storage-table
+      author: aeliseev
+      changes:
+        - createTable:
+            tableName: STORAGE
+            columns:
+              - column:
+                  name: ID
+                  type: NUMBER(19, 0)
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: ITEM_FK
+                  type: NUMBER(19, 0)
+              - column:
+                  name: SIZE
+                  type: NUMBER(19, 0)
+              - column:
+                  name: DATE_OF_RECEIPT
+                  type: TIMESTAMP(6)
+
+        - addForeignKeyConstraint:
+            baseColumnNames: ITEM_FK
+            baseTableName: STORAGE
+            constraintName: FK_STORAGE_ITEM
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: ID
+            referencedTableName: ITEM
+            validate: true
+
+  - changeSet:
+      id: create-item-table
+      author: aeliseev
+      changes:
+        - createTable:
+            tableName: ITEM
+            columns:
+              - column:
+                  name: ID
+                  type: NUMBER(19, 0)
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(255 CHAR)
+              - column:
+                  name: SERIAL_NAME
+                  type: VARCHAR(255 CHAR)
+              - column:
+                  name: TYPE_FK
+                  type: NUMBER(19, 0)
+
+        - addForeignKeyConstraint:
+            baseColumnNames: TYPE_FK
+            baseTableName: ITEM
+            constraintName: FK_ITEM_TYPE
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: ID
+            referencedTableName: ITEM_TYPE
+            validate: true
+  - changeSet:
+      id: create-bill-table
+      author: aeliseev
+      changes:
+        - createTable:
+            tableName: BILL
+            columns:
+              - column:
+                  name: ID
+                  type: NUMBER(19, 0)
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: ITEM_FK
+                  type: NUMBER(19, 0)
+              - column:
+                  name: SIZE
+                  type: NUMBER(19, 0)
+              - column:
+                  name: DATE_OF_RECEIPT
+                  type: TIMESTAMP(6)
+
+        - addForeignKeyConstraint:
+            baseColumnNames: ITEM_FK
+            baseTableName: STORAGE
+            constraintName: FK_STORAGE_ITEM
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: ID
+            referencedTableName: ITEM
+            validate: true
+
+  - changeSet:
+      id: create-item-type-table
+      author: aeliseev
+      changes:
+        - createTable:
+            tableName: ITEM_TYPE
+            columns:
+              - column:
+                  name: ID
+                  type: NUMBER(19, 0)
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(255 CHAR)

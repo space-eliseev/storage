@@ -13,6 +13,7 @@ import java.util.UUID;
 @Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Item extends BaseEntity {
     private static final long serialVersionUID = -7592814301528030297L;
@@ -27,12 +28,12 @@ public class Item extends BaseEntity {
      * Уникальный идентификатор товара
      */
     @Column(name = "SERIAL_NAME")
-    private UUID serialName;
+    private String serialName;
 
     /**
      * Тип товара
      */
-    @Column(name = "TYPE")
-    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "TYPE_FK")
+    @ManyToOne
     private ItemType type;
 }
